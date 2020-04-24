@@ -38,21 +38,8 @@ def compress():
 					dtbw.append(i)
 		dtbw=[str(i)+'\n' for i in dtbw]
 		open('compressed.txt','w').writelines(dtbw)
-		'''response=make_response(send_from_directory('/home/karthik/huffmanapp','compressed.txt'))
-		response.headers["Content-Disposition"]="attachment; filename=compressed.txt"
-		os.system('rm compressed.txt')'''
-		return render_template('home.html',u="Image Uploaded!",c="DECOMPRESS!",ul='/decompressed')
-	return "TEEHEE"
+		return decompress() 
 
-@app.route('/decomupload',methods=['GET','POST'])
-def decom():
-	if request.method=='POST':
-		f = request.files['txtToUpload']
-		txtname=(f.filename)
-		f.save(txtname)
-		return render_template('home.html',u="Image Uploaded!",l="Text Uploaded!")
-
-@app.route('/decompressed',methods=['GET','POST'])
 def decompress():
 	if request.method=='POST':
 		global s
@@ -70,7 +57,7 @@ def decompress():
 			d.append(str(size))
 			open('decompressed.txt','w').writelines(d)
 			txttoimg.txttoimg('decompressed.txt')
-			response=make_response(send_from_directory('/home/karthik/huffmanapp','pic.jpg'))
+			response=make_response(send_from_directory('/home/karthik/Image Compression (Huffman Coding)','pic.jpg'))
 			response.headers["Content-Disposition"]="attachment; filename=compressed_image.jpg"
 			return response
 
