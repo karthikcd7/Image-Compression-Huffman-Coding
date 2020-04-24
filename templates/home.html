@@ -1,0 +1,87 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<html>
+  <head>
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+      p1 { 
+        color:#ffffff;
+        font-weight: bold;
+        font-size: 2cm;
+        font-style:oblique;
+        text-align: center;
+        padding-bottom: 10mm;
+        padding-top: 35mm;
+        padding-left:50mm ;
+        padding-bottom: 20mm;
+        
+         
+        }
+      body {
+        background-image:url('../../static/bg.jpeg');
+        background-size: cover;
+        
+        
+      }
+      
+    p {
+      color: white;
+      font-size: 7mm;
+    }
+    </style>
+
+  </head>
+  
+  <body>
+    
+
+    <p1> Compress Image <br>Save space</p1>
+    
+    
+      <div class="content-section">
+    
+      <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" id="file">
+      <p>Select image to upload:</p>
+      <p><input class = "button button1" type="file" name="fileToUpload" id="fileToUpload">
+      <input class="button button1" type="submit" value="{{ u }}" name="submit"></p>
+      </form>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script>
+      function filePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#file+ img').remove();
+                $('#file').after('<h3>Image Preview:</h3> <img src="'+e.target.result+'" width="650" height="500"/>');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $("#fileToUpload").change(function () {
+        
+        filePreview(this);
+      });
+      </script>
+      
+      <form action="/compressed" method="post">
+    <button class="button button1">COMPRESS!</button>
+    <!/form>
+    <!form action='/decomupload' method="post" enctype="multipart/form-data">
+    <!input type="file" name="txtToUpload" id="txtToUpload">
+    <!input type="submit" value="{{ l }}" name="submit" >
+    </form>
+    <br>
+    <form action="/decompressed" method="post">
+    <button class="button button1" >DECOMPRESS!</button>
+    </form>
+   
+</div>
+</body>
+</html>
+{% endblock %}
