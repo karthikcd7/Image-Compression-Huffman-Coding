@@ -1,13 +1,12 @@
 def imgtotxt(s):
 	from PIL import Image
 	from collections import Counter
-	im=Image.open(s)
+	im=Image.open(s).convert('RGB')
 	data=list(im.getdata())
 	open('test1.txt','w')
 	for i in data:
 		for j in range(3):
-			open('test1.txt','a').writelines(str(i[j]))
-			open('test1.txt','a').writelines('\n')
+			open('test1.txt','a').write(str(i[j])+'\n')
 	f=open('test2.txt','w')
 	with open('test1.txt', 'r') as fd:
 		lines = fd.read().split()
@@ -20,3 +19,9 @@ def imgtotxt(s):
 	
 	fd=open('test1.txt','a')
 	fd.write(str(im.size))
+	
+
+	
+
+
+	
